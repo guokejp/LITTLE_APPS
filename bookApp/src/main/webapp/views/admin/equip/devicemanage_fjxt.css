@@ -1,0 +1,56 @@
+/**
+* Description: 璁惧绠＄悊椤甸潰鐙珛鏍峰紡
+* Version: 2.0.0
+* Author: JIALIN,GUO
+* Date:2017/10/19
+* Copyright: (c) Copyright 2017 G. All Rights Reserved.
+**/
+@CHARSET "UTF-8";
+
+/*鍔犺浇鍥炬牱寮�/
+.mask_juhua_content {
+      display: none;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      opacity: 0.6;
+      z-index: 9999;
+}
+
+.table_page_div {border: 1px solid #ddd;border-top-width: 0;}
+
+/*-----------妯℃�妗�---------*/
+.addEquipmentModal .modal-body input {width: 160px;}
+.addEquipmentModal .modal-body .blankFill {margin-right:51px;}
+.modifyEquipmentModal .modal-body input {width: 160px;}
+
+
+.addPartModal table tfoot td {font-size: 13px; color: #5a5a5a;padding: 8px;}
+.modal-dialog .modal-body .addPartForEachPartTable {width: 100%;}
+.modal-dialog .modal-body .addPartForEachPartTable .table-label {width: 35%;padding: 8px;border-bottom: 1px solid #ddd;border-right: 1px solid #ddd;}
+.modal-dialog .modal-body .addPartForEachPartTable .table-value {width: 65%;padding: 2px 8px;border: 0;border-bottom: 1px solid #ddd;}
+.modal-dialog .modal-body .addPartForEachPartTable tbody tr:last-child .table-label {border-bottom-color: transparent;}
+.modal-dialog .modal-body .addPartForEachPartTable tbody tr:last-child .table-value {border-bottom-color: transparent;}
+
+.table-label {width: 15%;}
+#addPartForEachPart .table-label  { width: 27.8%;}
+#lookPartForEachPart .table-label {width: 22.8%;}
+
+/*浣嶇疆灞曠ず妗�/
+.spotlocate {
+      display: none;
+      color: #3a3a3a;
+}
+
+/*area*/
+.area { width: 100%;height: 100%;overflow: auto; }
+.ball {
+      width:20px;
+      height: 26px;
+      background: url("../images/earlywarning/maker.png");
+      position: absolute;
+}
+

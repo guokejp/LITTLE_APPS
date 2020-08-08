@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangrise.xunjian.admin.sm.mapper.UserApplyMapper">
+	<resultMap id="BaseResultMap"
+		type="com.kangrise.xunjian.admin.sm.entity.UserApply">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="cgroup_apply_id" property="cgroupApplyId"
+			jdbcType="BIGINT" />
+		<result column="leave_apply_id" property="leaveApplyId"
+			jdbcType="BIGINT" />
+		<result column="rank_apply_id" property="rankApplyId" jdbcType="BIGINT" />
+
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="CREATOR_ID" property="creatorId" jdbcType="BIGINT" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap type="com.kangrise.xunjian.admin.sm.entity.UserApply"
+		id="AllApplyMap" extends="BaseResultMap">
+		<association property="cgroup">
+			<result column="cgroup_startGid" property="startgid" />
+			<result column="cgroup_endGid" property="endgid" />
+			<result column="cgroup_reason" property="reason" />
+			<result column="cgroup_type" property="type" />
+			<result column="cgroup_status" property="status" />
+		</association>
+		<association property="leave">
+			<result column="leave_startTime" property="starttime" />
+			<result column="leave_endTime" property="endtime" />
+			<result column="leave_reason" property="reason" />
+			<result column="leave_type" property="type" />
+			<result column="leave_status" property="status" />
+		</association>
+		<association property="rank">
+			<result column="rank_userid" property="userid" />
+			<result column="rank_changeTime" property="changetime" />
+			<result column="rank_reason" property="reason" />
+			<result column="rank_type" property="type" />
+			<result column="rank_status" property="status" />
+		</association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, cgroup_apply_id, leave_apply_id, rank_apply_id,
+		CREATE_TIME, CREATOR_ID, type
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_user_apply
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_user_apply
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.kangrise.xunjian.admin.sm.entity.UserApply">
+		insert into t_user_apply (id,
+		cgroup_apply_id, leave_apply_id,
+		rank_apply_id)
+		values
+		(#{id,jdbcType=BIGINT}, #{cgroupApplyId,jdbcType=BIGINT},
+		#{leaveApplyId,jdbcType=BIGINT},
+		#{rankApplyId,jdbcType=BIGINT}),
+		#{createTime,jdbcType=TIMESTAMP},
+		#{creatorId,jdbcType=BIGINT},
+		#{type,jdbcType=INTEGER},
+	</insert>
+	<insert id="insertSelective" parameterType="com.kangrise.xunjian.admin.sm.entity.UserApply">
+		insert into t_user_apply
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="cgroupApplyId != null">
+				cgroup_apply_id,
+			</if>
+			<if test="leaveApplyId != null">
+				leave_apply_id,
+			</if>
+			<if test="rankApplyId != null">
+				rank_apply_id,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="creatorId != null">
+				CREATOR_ID,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="cgroupApplyId != null">
+				#{cgroupApplyId,jdbcType=BIGINT},
+			</if>
+			<if test="leaveApplyId != null">
+				#{leaveApplyId,jdbcType=BIGINT},
+			</if>
+			<if test="rankApplyId != null">
+				#{rankApplyId,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creatorId != null">
+				#{creatorId,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.kangrise.xunjian.admin.sm.entity.UserApply">
+		update t_user_apply
+		<set>
+			<if test="cgroupApplyId != null">
+				cgroup_apply_id = #{cgroupApplyId,jdbcType=BIGINT},
+			</if>
+			<if test="leaveApplyId != null">
+				leave_apply_id = #{leaveApplyId,jdbcType=BIGINT},
+			</if>
+			<if test="rankApplyId != null">
+				rank_apply_id = #{rankApplyId,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creatorId != null">
+				CREATOR_ID = #{creatorId,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.kangrise.xunjian.admin.sm.entity.UserApply">
+		update
+		t_user_apply
+		set cgroup_apply_id = #{cgroupApplyId,jdbcType=BIGINT},
+		leave_apply_id = #{leaveApplyId,jdbcType=BIGINT},
+		rank_apply_id =
+		#{rankApplyId,jdbcType=BIGINT},
+		CREATE_TIME =
+		#{createTime,jdbcType=TIMESTAMP},
+		CREATOR_ID =
+		#{creatorId,jdbcType=BIGINT},
+		type = #{type,jdbcType=INTEGER},
+		where id
+		= #{id,jdbcType=BIGINT}
+	</update>
+	<select id="listUserApplyByUid" resultType="map">
+		SELECT
+		apply.*, cgroup_apply.startGid cgroup_startGid,
+		cgroup_apply.endGid cgroup_endGid,
+		cgroup_apply.reason cgroup_reason,
+		cgroup_apply.type cgroup_type,
+		cgroup_apply.`status` cgroup_status,
+		leave_apply.startTime leave_startTime,
+		leave_apply.endTime
+		leave_endTime,
+		leave_apply.reason leave_reason,
+		leave_apply.type
+		leave_type,
+		leave_apply.`status` leave_status,
+		rank_apply.userid
+		rank_userid,
+		rankUser.`name` rank_userName,
+		rank_apply.changeStime
+		rank_changeStime,
+		rank_apply.changeEtime rank_changeEtime,
+		rank_apply.reason
+		rank_reason,
+		rank_apply.type
+		rank_type,
+		rank_apply.`status` rank_status
+		FROM
+		t_user_apply apply
+		LEFT
+		JOIN t_cgroup_apply cgroup_apply ON
+		apply.cgroup_apply_id =
+		cgroup_apply.id
+		LEFT JOIN t_leave_apply
+		leave_apply ON
+		apply.leave_apply_id =
+		leave_apply.id
+		LEFT JOIN
+		t_rank_apply rank_apply
+		ON apply.rank_apply_id = rank_apply.id
+		LEFT JOIN t_userinfo rankUser ON
+		rank_apply.userid = rankUser.id
+		<where>
+			apply.CREATOR_ID = #{uid,jdbcType=BIGINT}
+		</where>
+		GROUP BY apply.id DESC
+		limit #{fristRow},#{rows}
+	</select>
+	<select id="countUserApplyByUid" resultType="int">
+		SELECT
+		count(id)
+		FROM
+		t_user_apply
+		<where>
+			CREATOR_ID = #{uid,jdbcType=BIGINT}
+		</where>
+	</select>
+	<select id="getLastInsertId" resultType="long">
+		SELECT LAST_INSERT_ID()
+	</select>
+</mapper>

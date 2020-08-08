@@ -1,0 +1,90 @@
+/**
+* Description: 预警机制管理独立CSS样式
+* Version: 2.0.0
+* Author: JIALIN,GUO
+* Date:2017/10/25
+* Copyright: (c) Copyright 2017 G. All Rights Reserved.
+**/
+
+
+/*主体内容数据样式*/
+.li-custom {
+      width: 100%;
+      margin: 20px 0;
+      height: auto;
+      border: 1px solid #ccc;
+}
+
+/*title*/
+.li-custom .li-top-custom {
+      position: relative;
+      height: 30px;
+      line-height: 30px;
+      margin-left: 10px;
+      padding-left: 10px;
+}
+
+.li-custom .li-top-custom .span-block {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      background: #00a279;
+      width: 5px;
+      height: 20px;
+      display: inline-block;
+}
+.li-custom .li-top-custom .title-text {
+      font-size: 14px;
+      color: #5a5a5a;
+}
+
+/*content*/
+.li-custom .li-bottom-custom {
+      min-height: 25px;
+}
+.li-custom .li-bottom-custom .li-bottom-div-custom {
+      width: 100%;
+      margin: 15px 10px;
+      vertical-align: middle;
+      content: "";
+      display: table;
+      clear: both;
+}
+.div-left-custom span,
+.div-center-custom span,
+.div-right-custom span {
+      font-weight: 100;
+      float: left;
+      color: #3a3a3a;
+      padding: 3px 0;
+}
+
+
+.div-left-custom {
+      float: left;
+      margin: auto 0;
+      width: 30%;
+}
+
+.div-center-custom {
+      float: left;
+      margin-left: 4%;
+      width: 30%;
+}
+
+.div-right-custom {
+      margin-left: 4%;
+      float: right;
+      width: 30%;
+}
+
+
+
+.input-custom {
+      width: 65%;
+}
+
+
+/*保存按钮*/
+.yjjz_btn_box { text-align: center; }
+.yjjz_btn_box .btn { padding: 10px 75px; }

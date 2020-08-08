@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <classPathEntry location="E:\java_src\FinanceManager\WebContent\WEB-INF\lib\mysql-connector-java-5.1.26-bin.jar" />
+  <context id="travelTables" targetRuntime="MyBatis3">
+   
+	<commentGenerator>  
+        <property name="suppressAllComments" value="true" />  
+        <property name="javaFileEncoding" value="UTF-8"/>
+	</commentGenerator>
+    <!-- 数据库链接URL、用户名、密码 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://47.97.213.126:3306/monitorapp"
+           userId="monitorapp" password="monitorapp">
+     </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+    <!-- 生成模型的包名和位置 -->
+    <javaModelGenerator targetPackage="com.kangrise.xunjian.admin.sm.entity" targetProject="monitorApp">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+    <!-- 生成的映射文件包名和位置 -->
+    <sqlMapGenerator targetPackage="com.kangrise.xunjian.admin.sm.mapper"  targetProject="monitorApp">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+     <table tableName="t_action_log" domainObjectName="t_action_log" enableCountByExample="false" enableUpdateByExample="false"  enableDeleteByExample="false" enableSelectByExample="false"   selectByExampleQueryId="false"/>
+    
+  </context>
+  
+</generatorConfiguration>

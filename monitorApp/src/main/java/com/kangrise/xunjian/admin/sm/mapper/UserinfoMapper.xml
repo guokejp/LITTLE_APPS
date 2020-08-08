@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangrise.xunjian.admin.sm.mapper.UserinfoMapper">
+	<resultMap id="BaseResultMap" type="com.kangrise.xunjian.admin.sm.entity.Userinfo">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="groupid" property="groupid" jdbcType="BIGINT" />
+		<result column="roleid" property="roleid" jdbcType="BIGINT" />
+		<result column="loginaccount" property="loginaccount" jdbcType="VARCHAR" />
+		<result column="loginpasswd" property="loginpasswd" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="phoneauth" property="phoneauth" jdbcType="BIT" />
+		<result column="webauth" property="webauth" jdbcType="BIT" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="urlImage" property="urlimage" jdbcType="VARCHAR" />
+		<result column="fixtype" property="fixtype" jdbcType="VARCHAR" />
+		<result column="isdel" property="isdel" jdbcType="INTEGER" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="CREATOR_ID" property="creatorId" jdbcType="BIGINT" />
+		<association property="role" javaType="Role" resultMap="RoleResultMap">
+		</association>
+		<association property="group" javaType="UserGroup" resultMap="groupResultMap">
+		</association>
+	</resultMap>
+	<!-- 角色关联映射 -->
+	<resultMap type="com.kangrise.xunjian.admin.sm.entity.Role"
+		id="RoleResultMap">
+		<id property="id" column="roleid" jdbcType="BIGINT" />
+		<result property="rolename" column="rolename" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 分组关联映射 -->
+	<resultMap type="com.kangrise.xunjian.admin.sm.entity.UserGroup"
+		id="groupResultMap">
+		<result property="name" column="groupname" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, groupid,roleid, loginaccount, loginpasswd, name, phone, sex,
+		phoneauth, webauth, email,
+		urlImage, fixtype, isdel, CREATE_TIME, CREATOR_ID
+	</sql>
+	<!-- 关联角色查询 -->
+	<sql id="UserRoleList">
+		user.id, user.groupid, user.loginaccount, user.loginpasswd, user.name,
+		user.phone, user.sex,
+		user.phoneauth, user.webauth, user.email, user.urlImage, user.fixtype,
+		user.isdel,user.CREATE_TIME,
+		user.CREATOR_ID, role.id as roleid, role.rolename ,groups.name as groupname
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_userinfo
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_userinfo
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.kangrise.xunjian.admin.sm.entity.Userinfo">
+		insert into t_userinfo (id, groupid,roleid, loginaccount,
+		loginpasswd, name, phone,
+		sex, phoneauth, webauth, email,
+		urlImage, fixtype, isdel, CREATE_TIME,
+		CREATOR_ID)
+		values (#{id,jdbcType=BIGINT},
+		#{groupid,jdbcType=BIGINT},#{roleid,jdbcType=BIGINT},
+		#{loginaccount,jdbcType=VARCHAR},
+		#{loginpasswd,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR}, 
+		#{phoneauth,jdbcType=BIT},
+		#{webauth,jdbcType=BIT}, #{email,jdbcType=VARCHAR},
+		#{urlimage,jdbcType=VARCHAR}, #{fixtype,jdbcType=VARCHAR},
+		#{isdel,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP},
+		#{creatorId,jdbcType=BIGINT}
+	</insert>
+	<insert id="insertSelective" parameterType="com.kangrise.xunjian.admin.sm.entity.Userinfo">
+		insert into t_userinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="groupid != null">
+				groupid,
+			</if>
+			<if test="roleid != null">
+				roleid,
+			</if>
+			<if test="loginaccount != null">
+				loginaccount,
+			</if>
+			<if test="loginpasswd != null">
+				loginpasswd,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="phoneauth != null">
+				phoneauth,
+			</if>
+			<if test="webauth != null">
+				webauth,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="urlimage != null">
+				urlImage,
+			</if>
+			<if test="fixtype != null">
+				fixtype,
+			</if>
+			<if test="isdel != null">
+				isdel,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="creatorId != null">
+				CREATOR_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="groupid != null">
+				#{groupid,jdbcType=BIGINT},
+			</if>
+			<if test="roleid != null">
+				#{roleid,jdbcType=BIGINT},
+			</if>
+			<if test="loginaccount != null">
+				#{loginaccount,jdbcType=VARCHAR},
+			</if>
+			<if test="loginpasswd != null">
+				#{loginpasswd,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneauth != null">
+				#{phoneauth,jdbcType=BIT},
+			</if>
+			<if test="webauth != null">
+				#{webauth,jdbcType=BIT},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="urlimage != null">
+				#{urlimage,jdbcType=VARCHAR},
+			</if>
+			<if test="fixtype != null">
+				#{fixtype,jdbcType=VARCHAR},
+			</if>
+			<if test="isdel != null">
+				#{isdel,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creatorId != null">
+				#{creatorId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.kangrise.xunjian.admin.sm.entity.Userinfo">
+		update t_userinfo
+		<set>
+			<if test="groupid != null">
+				groupid = #{groupid,jdbcType=BIGINT},
+			</if>
+			<if test="roleid != null">
+				roleid = #{roleid,jdbcType=BIGINT},
+			</if>
+			<if test="loginaccount != null">
+				loginaccount = #{loginaccount,jdbcType=VARCHAR},
+			</if>
+			<if test="loginpasswd != null">
+				loginpasswd = #{loginpasswd,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneauth != null">
+				phoneauth = #{phoneauth,jdbcType=BIT},
+			</if>
+			<if test="webauth != null">
+				webauth = #{webauth,jdbcType=BIT},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="urlimage != null">
+				urlImage = #{urlimage,jdbcType=VARCHAR},
+			</if>
+			<if test="fixtype != null">
+				fixtype = #{fixtype,jdbcType=VARCHAR},
+			</if>
+			<if test="isdel != null">
+				isdel = #{isdel,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creatorId != null">
+				CREATOR_ID = #{creatorId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.kangrise.xunjian.admin.sm.entity.Userinfo">
+		update t_userinfo
+		set groupid = #{groupid,jdbcType=BIGINT},roleid =
+		#{roleid,jdbcType=BIGINT},
+		loginaccount = #{loginaccount,jdbcType=VARCHAR},
+		loginpasswd = #{loginpasswd,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=VARCHAR},
+		phoneauth = #{phoneauth,jdbcType=BIT},
+		webauth = #{webauth,jdbcType=BIT},
+		email = #{email,jdbcType=VARCHAR},
+		urlImage = #{urlimage,jdbcType=VARCHAR},
+		fixtype = #{fixtype,jdbcType=VARCHAR},
+		isdel = #{isdel,jdbcType=INTEGER},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		CREATOR_ID = #{creatorId,jdbcType=BIGINT},
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="listUserinfo" resultMap="BaseResultMap">
+		select
+		<include refid="UserRoleList"></include>
+		from t_userinfo user
+		left join t_role role on user.roleid = role.id
+		left join t_usergroup groups on user.groupid = groups.id
+		<if test="userinfo != null">
+			<where>
+				<if test="userinfo.id != null">
+					and user.id = #{userinfo.id,jdbcType=BIGINT}
+				</if>
+				<if test="userinfo.groupid != null">
+					and user.groupid = #{userinfo.groupid,jdbcType=BIGINT}
+				</if>
+				<if test="userinfo.roleid != null">
+					and user.roleid = #{userinfo.roleid,jdbcType=BIGINT}
+				</if>
+				<if test="userinfo.role.id != null">
+					and user.roleid = #{userinfo.role.id,jdbcType=BIGINT}
+				</if>
+				<if test="userinfo.loginaccount != null">
+					and user.loginaccount = #{userinfo.loginaccount,jdbcType=VARCHAR}
+				</if>
+				<if test="userinfo.loginpasswd != null">
+					and user.loginpasswd = #{userinfo.loginpasswd,jdbcType=VARCHAR}
+				</if>
+				<if test="userinfo.name != null">
+					and user.name like '%${userinfo.name}%'
+				</if>
+				<if test="userinfo.phone != null">
+					and user.phone = #{userinfo.phone,jdbcType=VARCHAR}
+				</if>
+				<if test="userinfo.sex != null">
+					and user.sex = #{userinfo.sex,jdbcType=VARCHAR}
+				</if>
+				<if test="userinfo.phoneauth != null">
+					and user.phoneauth = #{userinfo.phoneauth,jdbcType=BIT}
+				</if>
+				<if test="userinfo.webauth != null">
+					and user.webauth = #{userinfo.webauth,jdbcType=BIT}
+				</if>
+				<if test="userinfo.email != null">
+					and user.email = #{userinfo.email,jdbcType=VARCHAR}
+				</if>
+				<if test="userinfo.urlimage != null">
+					and user.urlimage = #{userinfo.urlimage,jdbcType=VARCHAR}
+				</if>
+				<if test="userinfo.fixtype != null">
+					and user.fixtype = #{userinfo.fixtype,jdbcType=VARCHAR}
+				</if>
+				<if test="userinfo.isdel != null">
+					and user.isdel = #{userinfo.isdel,jdbcType=INTEGER}
+				</if>
+				<if test="userinfo.createTime != null">
+					and user.createTime = #{userinfo.createTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="userinfo.creatorId != null">
+					and user.creatorId = #{userinfo.creatorId,jdbcType=BIGINT}
+				</if>
+				<if test="userinfo.role != null">
+					<if test="userinfo.role.rolename != null">
+						and role.rolename like '%${userinfo.role.rolename}%'
+					</if>
+				</if>
+				and user.isdel=0
+			</where>
+		</if>
+	</select>
+	<select id="getUserinfoByLoginaccount" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_userinfo
+		where loginaccount = #{loginaccount,jdbcType=VARCHAR}
+	</select>
+	<select id="getUserinfoByName" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_userinfo
+		where name like '%${name}%'
+	</select>
+	<select id="listOtherGroupUserinfos" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_userinfo
+		where <![CDATA[  groupid <> #{groupid,jdbcType=BIGINT} ]]>
+	</select>
+	
+	<select id="selectBygroupId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_userinfo
+		where  groupid = #{gid,jdbcType=BIGINT}
+	</select>
+	<!-- 根据组id查询未删除的人员 -->
+	<select id="selectBygroupIdOrIsdel" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_userinfo
+		where  groupid = #{gid,jdbcType=BIGINT}
+		AND isdel = 0
+	</select>
+	<update id="logicDeleteByPrimaryKey" parameterType="java.lang.Long">
+		update t_userinfo
+		set isdel = 1
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	
+	<!-- 批量查询用户 -->
+	<select id="selectByPrimaryKeys" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_userinfo
+		where id in 
+		<foreach collection="list" item="userIds" index="index" open="(" separator="," close=")">
+			#{userIds}
+		</foreach>
+	</select>
+	
+	<!-- 根据组id批量查询人员 -->
+	<select id="selectBygroupIds" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_userinfo
+		where groupid in 
+		<foreach collection="list" item="groupids" index="index" open="(" separator="," close=")">
+			#{groupids}
+		</foreach>
+	</select>
+</mapper>

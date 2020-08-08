@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangrise.xunjian.admin.equip.mapper.EquipInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.kangrise.xunjian.admin.equip.entity.EquipInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pid" property="pid" jdbcType="BIGINT" />
+    <result column="rootid" property="rootid" jdbcType="BIGINT" />
+    <result column="istreeleaf" property="istreeleaf" jdbcType="INTEGER" />
+    <result column="istableleaf" property="istableleaf" jdbcType="INTEGER" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="dkindid" property="dkindid" jdbcType="BIGINT" />
+    <result column="identify" property="identify" jdbcType="VARCHAR" />
+    <result column="ifirm" property="ifirm" jdbcType="VARCHAR" />
+    <result column="ibrand" property="ibrand" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="infourl" property="infourl" jdbcType="VARCHAR" />
+    <result column="ispecific" property="ispecific" jdbcType="VARCHAR" />
+    <result column="istatus" property="istatus" jdbcType="INTEGER" />
+    <result column="onlinedate" property="onlinedate" jdbcType="TIMESTAMP" />
+    <result column="baddate" property="baddate" jdbcType="TIMESTAMP" />
+    <result column="spotlocate" property="spotlocate" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATOR_ID" property="creatorId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.kangrise.xunjian.admin.equip.entity.EquipInfo" extends="BaseResultMap" >
+  </resultMap>
+  
+  <resultMap id="ResultMapOfTableInfo" type="hashmap" extends="ResultMapWithBLOBs" >
+    <result column="root_name" property="root_name" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    id, pid, rootid, istreeleaf, istableleaf, isdel, name ,dkindid , identify,ifirm ,ibrand , unit, 
+    infourl, ispecific,istatus, onlinedate, baddate, spotlocate, CREATE_TIME, CREATOR_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_equipinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_equipinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kangrise.xunjian.admin.equip.entity.EquipInfo" >
+    insert into t_equipinfo (id, pid, rootid, 
+      istreeleaf, istableleaf, isdel, 
+      name, dkindid, identify,ifirm ,ibrand , 
+      unit, infourl, 
+      ispecific, istatus, onlinedate, 
+      baddate, spotlocate
+      CREATE_TIME, CREATOR_ID
+      )
+    values (#{id,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT}, #{rootid,jdbcType=BIGINT}, 
+      #{istreeleaf,jdbcType=INTEGER}, #{istableleaf,jdbcType=INTEGER}, #{isdel,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR},  #{dkindid,jdbcType=BIGINT}, #{identify,jdbcType=VARCHAR}, 
+      #{ifirm,jdbcType=VARCHAR},#{ibrand,jdbcType=VARCHAR},
+      #{unit,jdbcType=VARCHAR}, #{infourl,jdbcType=VARCHAR}, 
+      #{ispecific,jdbcType=VARCHAR}, #{istatus,jdbcType=INTEGER}, #{onlinedate,jdbcType=TIMESTAMP}, 
+      #{baddate,jdbcType=TIMESTAMP}, #{spotlocate,jdbcType=VARCHAR}
+      #{createTime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"  parameterType="com.kangrise.xunjian.admin.equip.entity.EquipInfo" >
+    insert into t_equipinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="rootid != null" >
+        rootid,
+      </if>
+      <if test="istreeleaf != null" >
+        istreeleaf,
+      </if>
+      <if test="istableleaf != null" >
+        istableleaf,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="dkindid != null" >
+        dkindid,
+      </if>
+      <if test="identify != null" >
+        identify,
+      </if>
+      <if test="ifirm != null" >
+        ifirm,
+      </if>
+      <if test="ibrand != null" >
+        ibrand,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="infourl != null" >
+        infourl,
+      </if>
+      <if test="ispecific != null" >
+        ispecific,
+      </if>
+      <if test="istatus != null" >
+        istatus,
+      </if>
+      <if test="onlinedate != null" >
+        onlinedate,
+      </if>
+      <if test="baddate != null" >
+        baddate,
+      </if>
+      <if test="spotlocate != null" >
+        spotlocate,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="creatorId != null" >
+        CREATOR_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="rootid != null" >
+        #{rootid,jdbcType=BIGINT},
+      </if>
+      <if test="istreeleaf != null" >
+        #{istreeleaf,jdbcType=INTEGER},
+      </if>
+      <if test="istableleaf != null" >
+        #{istableleaf,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dkindid != null" >
+        #{dkindid,jdbcType=BIGINT},
+      </if>
+      <if test="identify != null" >
+        #{identify,jdbcType=VARCHAR},
+      </if>
+       <if test="ifirm != null" >
+        #{ifirm,jdbcType=VARCHAR},
+      </if>
+       <if test="ibrand != null" >
+        #{ibrand,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="infourl != null" >
+        #{infourl,jdbcType=VARCHAR},
+      </if>
+      <if test="ispecific != null" >
+        #{ispecific,jdbcType=VARCHAR},
+      </if>
+      <if test="istatus != null" >
+        #{istatus,jdbcType=INTEGER},
+      </if>
+      <if test="onlinedate != null" >
+        #{onlinedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baddate != null" >
+        #{baddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replacedate != null" >
+        #{replacedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spotlocate != null" >
+        #{spotlocate,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.kangrise.xunjian.admin.equip.entity.EquipInfo" >
+    update t_equipinfo
+    <set >
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=BIGINT},
+      </if>
+      <if test="rootid != null" >
+        rootid = #{rootid,jdbcType=BIGINT},
+      </if>
+      <if test="istreeleaf != null" >
+        istreeleaf = #{istreeleaf,jdbcType=INTEGER},
+      </if>
+      <if test="istableleaf != null" >
+        istableleaf = #{istableleaf,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="dkindid != null" >
+        dkindid = #{dkindid,jdbcType=BIGINT},
+      </if>
+      <if test="identify != null" >
+        identify = #{identify,jdbcType=VARCHAR},
+      </if>
+      <if test="ifirm != null" >
+        ifirm = #{ifirm,jdbcType=VARCHAR},
+      </if>
+      <if test="ibrand != null" >
+        ibrand = #{ibrand,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="infourl != null" >
+        infourl = #{infourl,jdbcType=VARCHAR},
+      </if>
+      <if test="ispecific != null" >
+        ispecific = #{ispecific,jdbcType=VARCHAR},
+      </if>
+      <if test="istatus != null" >
+        istatus = #{istatus,jdbcType=INTEGER},
+      </if>
+      <if test="onlinedate != null" >
+        onlinedate = #{onlinedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="baddate != null" >
+        baddate = #{baddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spotlocate != null" >
+        spotlocate = #{spotlocate,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        CREATOR_ID = #{creatorId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kangrise.xunjian.admin.equip.entity.EquipInfo" >
+    update t_equipinfo
+    set pid = #{pid,jdbcType=BIGINT},
+      rootid = #{rootid,jdbcType=BIGINT},
+      istreeleaf = #{istreeleaf,jdbcType=INTEGER},
+      istableleaf = #{istableleaf,jdbcType=INTEGER},
+      isdel = #{isdel,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      dkindid = #{dkindid,jdbcType=BIGINT},
+      identify = #{identify,jdbcType=VARCHAR},
+      ifirm = #{ifirm,jdbcType=VARCHAR},
+      ibrand = #{ibrand,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      infourl = #{infourl,jdbcType=VARCHAR},
+      ispecific = #{ispecific,jdbcType=VARCHAR},
+      istatus = #{istatus,jdbcType=INTEGER},
+      onlinedate = #{onlinedate,jdbcType=TIMESTAMP},
+      baddate = #{baddate,jdbcType=TIMESTAMP},
+      spotlocate = #{spotlocate,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATOR_ID = #{creatorId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kangrise.xunjian.admin.equip.entity.EquipInfo" >
+    update t_equipinfo
+    set pid = #{pid,jdbcType=BIGINT},
+      rootid = #{rootid,jdbcType=BIGINT},
+      istreeleaf = #{istreeleaf,jdbcType=INTEGER},
+      istableleaf = #{istableleaf,jdbcType=INTEGER},
+      isdel = #{isdel,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      dkindid = #{dkindid,jdbcType=BIGINT},
+      identify = #{identify,jdbcType=VARCHAR},
+      ifirm = #{ifirm,jdbcType=VARCHAR},
+      ibrand = #{ibrand,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      infourl = #{infourl,jdbcType=VARCHAR},
+      ispecific = #{ispecific,jdbcType=VARCHAR},
+      istatus = #{istatus,jdbcType=INTEGER},
+      onlinedate = #{onlinedate,jdbcType=TIMESTAMP},
+      baddate = #{baddate,jdbcType=TIMESTAMP},
+      spotlocate = #{spotlocate,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATOR_ID = #{creatorId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 自定义操作 -->
+  
+  <select id="getAllEquipType" resultType="java.util.Map" >
+  	SELECT e.id, e.pid, e.rootid, e. `name`, e.dkindid, e.identify, d.`name` AS dkindname FROM t_equipinfo e LEFT JOIN t_device_kind d ON d.id = e.dkindid WHERE e.isdel = 0 AND e.istableleaf = 0 ORDER BY e.id
+  </select>
+  
+  <!-- 条件查询设备 -->
+  <select id="selectEntityByKeys" resultMap="ResultMapWithBLOBs" parameterType="com.kangrise.xunjian.admin.equip.entity.EquipInfo">
+  	 select 
+    <include refid="Base_Column_List" />
+    from t_equipinfo
+    where 1=1 
+  	<if test="pid != null and pid != ''">
+		and pid = #{pid,jdbcType=BIGINT}
+	</if>
+	<if test="id != null and id != ''">
+		and id = #{id,jdbcType=BIGINT}
+	</if>
+	<if test="name != null and name != ''">
+		and name like '%${name,jdbcType=VARCHAR}%'
+	</if>
+  </select>
+  <update id="setTableLeafPid">
+  		UPDATE t_equipinfo SET pid=#{1} WHERE pid=#{0} and istableleaf=1
+  </update>
+  
+   <!-- 查询所有设备 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_equipinfo
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKeyOfPid" parameterType="java.lang.Long" >
+    delete from t_equipinfo
+    where pid = #{pid,jdbcType=BIGINT}
+  </delete>
+  <update id="logicDeleteByPrimaryKeyOfPid" parameterType="java.lang.Long" >
+    UPDATE t_equipinfo
+    set isdel=1
+    where pid = #{pid,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectTableLeafIdsByPid" resultType="java.lang.String"  parameterType="java.lang.Long" >
+  	SELECT GROUP_CONCAT(CAST(id AS CHAR)) FROM t_equipinfo WHERE isdel=0 and pid=#{pid}
+  </select>
+  
+  <select id="selectTableLeafByPid" resultMap="ResultMapOfTableInfo"  parameterType="java.lang.Long" >
+  	select e.*,re.`name` AS root_name,dk.name as dkname from t_equipinfo e 
+		LEFT JOIN t_equipinfo re ON e.rootid=re.id
+		LEFT JOIN t_device_kind dk ON e.dkindid=dk.id
+		where e.isdel=0 AND e.pid = #{pid,jdbcType=BIGINT} and e.istableleaf=1
+  </select>
+  
+  
+  <select id="getEquipTableLeafByParams2" resultMap="ResultMapOfTableInfo"  parameterType="java.util.Map" >
+  	select e.*,re.`name` AS root_name,dk.name as dkname from t_equipinfo e 
+		LEFT JOIN t_equipinfo re ON e.rootid=re.id
+		LEFT JOIN t_device_kind dk ON e.dkindid=dk.id
+		where 1=1 AND e.isdel=0 AND e.pid = #{pid,jdbcType=BIGINT} and e.istableleaf=1
+		<if test="key != null and key != ''">
+			and e.name like '%${key}%' OR e.identify like '%${key}%'
+		</if>
+		limit #{page},#{rows}
+  </select>
+  <select id="getEquipTableLeafByParams" resultMap="ResultMapOfTableInfo"  parameterType="java.util.Map" >
+  	select e.*,re.`name` AS root_name,dk.name as dkname from t_equipinfo e 
+		LEFT JOIN t_equipinfo re ON e.rootid=re.id
+		LEFT JOIN t_device_kind dk ON e.dkindid=dk.id
+		where 1=1 AND e.isdel=0 and e.istableleaf=1
+		<if test="pid != null and pid != ''">
+			AND e.pid = #{pid,jdbcType=BIGINT}
+		</if>
+		<if test="key != null and key != ''">
+			and e.name like '%${key}%' OR e.identify like '%${key}%'
+		</if>
+  </select>
+  <!-- 查询所有设备和其父级菜单 -->
+  <select id="getNameAndPname" resultType="java.util.Map" >
+  	SELECT e.`name`,e.id,e.pid,e.rootid,e2.`name` AS pname,e.identify FROM t_equipinfo e
+	LEFT JOIN t_equipinfo e2 ON e2.id = e.pid
+	WHERE 1=1 AND e.isdel = 0 AND e.istableleaf = 1
+  </select>
+  <!-- 根据id查询所有信息关联查询区域 -->
+  <select id="selectByKeys" resultMap="ResultMapOfTableInfo"  parameterType="java.util.Map" >
+  	select e.*,a.`name` as area_name,re.`name` AS root_name ,dk.name AS dkname from t_equipinfo e 
+		LEFT JOIN t_area a ON e.area_id=a.id
+		LEFT JOIN t_equipinfo re ON e.rootid=re.id
+		LEFT JOIN t_device_kind dk ON e.dkindid=dk.id
+		where 1=1 and e.istableleaf=1 
+		<if test="id != null and id!=''">
+			and e.id = #{id}
+		</if>
+		<if test="rootid != null and rootid!=''">
+			and e.rootid = #{rootid}
+		</if>
+		<if test="pid != null and pid!=''">
+			and e.pid = #{pid}
+		</if>
+  </select>
+  <!-- 批量修改基本信息的区域id -->
+  <update id="updateEquipinfos" parameterType="java.util.Map">
+  	UPDATE t_equipinfo SET area_id = #{area_id} 
+  	WHERE id in
+  	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
+  	#{item}  
+ 	</foreach>  
+  </update>
+  <!-- 跟据区域id修改区域 -->
+  <update id="updateByPrimaryArea" parameterType="java.util.Map" >
+    update t_equipinfo
+    <set >
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where area_id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getEquipTableBydkkind" resultMap="ResultMapWithBLOBs"  parameterType="java.util.Map" >
+  	select * from t_equipinfo 
+		where 1=1 AND istableleaf=1 AND isdel=0
+		<if test="deviceKindId != null and deviceKindId != ''">
+			and dkindid = #{deviceKindId,jdbcType=BIGINT}
+		</if>
+  </select>
+  
+  <select id="getEquipTreeLeafBydkkind" resultMap="ResultMapWithBLOBs"  parameterType="java.util.Map" >
+  	select * from t_equipinfo 
+		where 1=1 AND istreeleaf=1 AND isdel=0
+		<if test="deviceKindId != null and deviceKindId != ''">
+			and dkindid = #{deviceKindId,jdbcType=BIGINT}
+		</if>
+  </select>
+  
+  
+  <select id="getCountGroupByDeviceKind" resultType="map">
+  	SELECT
+	count(kind.id) count,
+	kind.id,
+	kind.`name`
+	FROM
+		t_equipinfo equip
+	LEFT JOIN t_device_kind kind ON equip.dkindid = kind.id
+	where equip.isdel=0
+	AND equip.istableleaf = 1
+	GROUP BY
+		kind.id
+  </select>
+  
+  <select id="listEquipinfo" resultType="map">
+  	SELECT
+	equip.id,
+	equip.`name`,
+	equip.identify,
+	area.`name` as area
+	FROM
+		t_equipinfo equip
+	LEFT JOIN t_area area ON equip.area_id = area.id
+	<where>
+	AND equip.istableleaf = 1
+	AND equip.isdel = 0
+		<if test="areaid != null and areaid != ''">
+			and equip.area_id = #{areaid}
+		</if>
+		<if test="kindid != null and kindid != ''">
+			and equip.dkindid = #{kindid}
+		</if>
+	</where>
+	limit #{startRow},#{rows}
+  </select>
+  
+  <select id="getTotalrowsForListEquipinfo" resultType="int">
+  	SELECT
+  	count(equip.id)
+	FROM
+		t_equipinfo equip
+	LEFT JOIN t_area area ON equip.area_id = area.id
+	where equip.isdel=0
+	AND equip.istableleaf = 1
+		<if test="areaid != null and areaid != ''">
+			and equip.area_id = #{areaid}
+		</if>
+		<if test="kindid != null and kindid != ''">
+			and equip.dkindid = #{kindid}
+		</if>
+  </select>
+  <!-- 查询所有设备厂商 -->
+  <select id="getIfirm" resultType="String">
+  	SELECT DISTINCT ifirm
+	FROM t_equipinfo 
+	WHERE 1=1 
+	AND ifirm IS NOT NULL
+	AND ifirm <![CDATA[!= ]]> ''
+  </select>
+  <!-- 根据设备id和频率查询异常设备任务 -->
+  <select id="getTaskIdBy" parameterType="java.util.Map" resultType="java.lang.String">
+  	SELECT task.id
+	FROM t_maintain main
+	JOIN t_taskwork task ON task.main_id = main.id
+	JOIN t_taskwork_abnormal abnor ON abnor.tid = task.id
+	LEFT JOIN t_scheme scheme ON scheme.id = main.schemeid
+	LEFT JOIN t_frequency fre ON fre.id = scheme.fre_id
+	WHERE 1=1 AND task.result = '20'
+	<if test="infoid != null and infoid != ''">
+		AND main.equipid = #{infoid}
+	</if>
+	<if test="schemeid != null and schemeid != ''">
+		AND scheme.id = #{schemeid}
+	</if>
+	GROUP BY task.id
+  </select>
+  <!-- 根据设备id和频率查询异常设备任务 -->
+  <select id="getAbnormalIdentBy" parameterType="java.util.Map" resultType="map">
+  	SELECT 
+  	<if test="warn != null and warn != ''">
+  		MAX(abnormal.id) id,
+  	</if>
+  	abnor.identify
+	FROM t_maintain main
+	JOIN t_taskwork task ON task.main_id = main.id
+	JOIN t_taskwork_abnormal abnor ON abnor.tid = task.id
+	LEFT JOIN t_scheme scheme ON scheme.id = main.schemeid
+	LEFT JOIN t_frequency fre ON fre.id = scheme.fre_id
+	WHERE 1=1 AND task.result = '20'
+	<if test="infoid != null and infoid != ''">
+		AND main.equipid = #{infoid}
+	</if>
+	<if test="schemeid != null and schemeid != ''">
+		AND scheme.id = #{schemeid}
+	</if>
+	<if test="warn != null and warn != ''">
+		AND abnor.iswarn = #{warn}
+	</if>
+	GROUP BY abnor.identify
+  </select>
+  <!-- 根据设备类型id查询设备 -->
+  <select id="selectByDeviceKindId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_equipinfo
+    where isdel = 0 and dkindid = #{dkid}
+  </select>
+  
+  <!-- 根据id逻辑删除 -->
+  <update id="logicDeleteByPrimaryKey" parameterType="java.lang.Long" >
+    UPDATE t_equipinfo
+    set isdel=1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 查询设备 -->
+  <select id="getEquipinfo" resultType="map">
+  	SELECT
+	equip.id,
+	equip.`name`,
+	equip.identify,
+	area.`name` AS area,
+	parent.`name` parentName
+	FROM
+		t_equipinfo equip
+	LEFT JOIN t_area area ON equip.area_id = area.id
+	LEFT JOIN t_equipinfo parent ON parent.id = equip.pid
+	where equip.isdel = 0
+  </select>
+  
+  <!-- 设备种类分组查询 -->
+  <select id="getDeviceGroupKind" resultType="map">
+  	SELECT d.`name`,count(*) AS count
+	FROM t_equipinfo e
+	LEFT JOIN t_device_kind d
+	ON d.id = e.dkindid
+	WHERE e.isdel = 0 AND e.istableleaf = 1
+	GROUP BY d.id
+  </select>
+   <!-- 设备区域分组查询 -->
+  <select id="getAreaCompared" resultType="map">
+  	SELECT a.`name`,count(*) AS count
+	FROM t_equipinfo e
+	LEFT JOIN t_area a
+	ON a.id = e.area_id
+	WHERE e.isdel = 0 AND e.istableleaf = 1
+	GROUP BY a.id
+  </select>
+  <!-- 查询所有预警设备 -->
+  <select id="getWarnDevice" resultType="int">
+  	SELECT COUNT(*)
+	FROM t_equipinfo
+	WHERE 1=1 
+	AND isdel = 0
+	AND istableleaf = 1
+	AND istatus IS NOT NULL
+	<![CDATA[ AND istatus <> 10 ]]>
+  </select>
+  
+   <!-- 查询同名设备 -->
+  <select id="checkSameEquip" parameterType="com.kangrise.xunjian.admin.equip.entity.EquipInfo" resultType="int">
+  	SELECT COUNT(*)
+	FROM t_equipinfo
+	WHERE 1=1 
+	AND isdel = 0
+	AND name = #{name}
+  </select>
+  
+  <!-- 根据设备种类统计设备 -->
+  <select id="countEquipGroupByKind" resultType="map">
+  	SELECT
+		COUNT(equip.id) count,
+		equip.dkindid kind_id,
+		kind.`name` kind_name
+	FROM
+		t_equipinfo equip
+	LEFT JOIN t_device_kind kind ON equip.dkindid = kind.id
+	WHERE 1=1
+	AND equip.istableleaf = 1
+	AND equip.isdel = 0
+	GROUP BY kind.id
+  </select>
+  
+  <!-- 根据设备区域统计设备 -->
+  <select id="countEquipGroupByArea" resultType="map">
+  	SELECT
+		COUNT(equip.id) count,
+		equip.area_id area_id,
+		area.`name` area_name
+	FROM
+		t_equipinfo equip
+	LEFT JOIN t_area area ON equip.area_id = area.id
+	WHERE area.id > 1
+	AND equip.istableleaf = 1
+	AND equip.isdel = 0
+	GROUP BY area.id
+  </select>
+  
+  <select id="getEquipKindInfo" resultType="map" parameterType="java.lang.Long">
+  	SELECT info.id,info.name,child.num from t_equipinfo info
+	LEFT JOIN (SELECT COUNT(id) as num,pid FROM t_equipinfo WHERE isdel=0 GROUP BY pid) child ON child.pid=info.id
+	WHERE istreeleaf=1 AND isdel=0
+	<if test="id != null and id != ''">
+		and info.id = #{id}
+	</if>
+  </select>
+  
+  <select id="selectEquipTableLeafByname" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select 
+    <include refid="Base_Column_List" />
+    from t_equipinfo
+	WHERE istableleaf=1 AND isdel=0
+	and name like '%${equipName}%'
+  </select>
+  
+  
+</mapper>

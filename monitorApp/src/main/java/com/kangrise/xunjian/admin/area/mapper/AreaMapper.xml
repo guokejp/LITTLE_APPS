@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangrise.xunjian.admin.area.mapper.AreaMapper" >
+  <resultMap id="BaseResultMap" type="com.kangrise.xunjian.admin.area.entity.Area" >
+    <id column="id" property="id" jdbcType="BIGINT"/>
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATOR_ID" property="creatorId" jdbcType="BIGINT"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name,CREATE_TIME, CREATOR_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_area
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_area
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kangrise.xunjian.admin.area.entity.Area" >
+    insert into t_area (id, name,CREATE_TIME, CREATOR_ID)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},#{createTime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kangrise.xunjian.admin.area.entity.Area" >
+    insert into t_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="creatorId != null" >
+        CREATOR_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kangrise.xunjian.admin.area.entity.Area" >
+    update t_area
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        CREATOR_ID = #{creatorId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kangrise.xunjian.admin.area.entity.Area" >
+    update t_area
+    set name = #{name,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATOR_ID = #{creatorId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 自定义 -->
+  <!-- 查询所有区域 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_area
+    where id>1
+  </select>
+  
+  <!-- 根据名字查询区域是否存在 -->
+   <select id="selectByName" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_area
+    <where>
+    	name = #{name,jdbcType=VARCHAR}
+    </where>
+  </select>
+  <!-- 根据区域id查询设备信息 -->
+  <select id="getDeviceByArea" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT e.id,e.rootid,f.name AS parent,e.`name`,e.identify FROM t_equipinfo e  
+	LEFT JOIN t_equipinfo f ON f.id = e.rootid
+	WHERE 1=1 AND e.istableleaf=1 and e.isdel = 0
+	AND e.area_id = #{id,jdbcType=BIGINT}
+	<if test="keys != null and keys !=''">
+		AND
+		(
+			e.`name` LIKE CONCAT('%',#{keys},'%') 
+			OR e.identify LIKE CONCAT('%',#{keys},'%')
+		)
+	</if>
+	limit #{page},#{rows}
+  </select>
+    <!-- 根据区域id查询设备数量 -->
+   <select id="getDeviceCountByArea" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT e.id,f.name AS parent,e.`name`,e.identify FROM t_equipinfo e  
+	LEFT JOIN t_equipinfo f ON f.id = e.rootid
+	WHERE 1=1 AND e.istableleaf=1 and e.isdel = 0
+	AND e.area_id = #{id,jdbcType=BIGINT}
+	<if test="keys != null and keys !=''">
+		AND
+		(
+			e.`name` LIKE CONCAT('%',#{keys},'%') 
+			OR e.identify LIKE CONCAT('%',#{keys},'%')
+		)
+	</if>
+  </select>
+  
+  <!-- 查询设备根节点 -->
+  <select id="getRootName" resultType="java.util.Map">
+  	SELECT id,`name` FROM t_equipinfo WHERE rootid=0 and isdel = 0
+  </select> 
+  
+  <!-- 根据所属设备和设备名称查询设备信息 --> 
+   <select id="getDeviceByRootOrName" parameterType="java.util.Map" resultType="java.util.Map">
+  		SELECT id,`name` FROM t_equipinfo WHERE rootid=0 and isdel = 0
+  </select> 
+</mapper>

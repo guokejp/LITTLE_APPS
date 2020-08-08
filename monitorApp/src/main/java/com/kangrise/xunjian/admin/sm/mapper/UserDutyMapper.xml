@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangrise.xunjian.admin.sm.mapper.UserDutyMapper">
+	<resultMap id="BaseResultMap" type="com.kangrise.xunjian.admin.sm.entity.UserDuty">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="year" property="year" jdbcType="INTEGER" />
+		<result column="month" property="month" jdbcType="INTEGER" />
+		<result column="day" property="day" jdbcType="INTEGER" />
+		<result column="dayweek" property="dayweek" jdbcType="INTEGER" />
+		<result column="frequency" property="frequency" jdbcType="VARCHAR" />
+		<result column="olduserid" property="olduserid" jdbcType="BIGINT" />
+		<result column="userid" property="userid" jdbcType="BIGINT" />
+		<result column="areaids" property="areaids" jdbcType="VARCHAR" />
+		<result column="date" property="date" jdbcType="TIMESTAMP" />
+
+		<result column="isleave" property="isleave" jdbcType="INTEGER" />
+		<result column="thanDay" property="thanDay" jdbcType="VARCHAR" />
+		<result column="leavetype" property="leavetype" jdbcType="VARCHAR" />
+		<result column="changeduty" property="changeduty" jdbcType="INTEGER" />
+		<result column="changeday" property="changeday" jdbcType="TIMESTAMP" />
+
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="CREATOR_ID" property="creatorId" jdbcType="BIGINT" />
+		<association property="userinfo" javaType="Userinfo"
+			resultMap="UserMap">
+		</association>
+	</resultMap>
+	<resultMap type="com.kangrise.xunjian.admin.sm.entity.Userinfo"
+		id="UserMap">
+		<result column="username" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, year, month, day, dayweek, frequency,olduserid, userid,
+		areaids,
+		date,isleave,thanDay,leavetype,changeduty,changeday,
+		CREATE_TIME, CREATOR_ID
+	</sql>
+	<sql id="With_User_List">
+		ud.id, ud.year, ud.month, ud.day, ud.dayweek, ud.frequency,
+		ud.olduserid ,ud.userid, ud.areaids,
+		ud.date,ud.isleave,ud.thanDay,ud.leavetype,ud.changeduty,ud.changeday,
+		ud.CREATE_TIME,
+		ud.CREATOR_ID,
+		user.name
+		as username
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_userduty
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_userduty
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.kangrise.xunjian.admin.sm.entity.UserDuty">
+		insert into t_userduty (id,
+		year, month,
+		day, dayweek, frequency,
+		olduserid, userid, areaids, date,
+		isleave,thanDay,leavetype,changeduty,changeday,
+		CREATE_TIME, CREATOR_ID)
+		values
+		(#{id,jdbcType=BIGINT},
+		#{year,jdbcType=INTEGER},
+		#{month,jdbcType=INTEGER},
+		#{day,jdbcType=INTEGER},
+		#{dayweek,jdbcType=INTEGER},
+		#{frequency,jdbcType=VARCHAR},
+		#{olduserid,jdbcType=BIGINT},
+		#{userid,jdbcType=BIGINT},
+		#{areaids,jdbcType=VARCHAR},
+		#{date,jdbcType=TIMESTAMP},
+
+		#{isleave,jdbcType=INTEGER},
+		#{thanDay,jdbcType=INTEGER},
+		#{leavetype,jdbcType=VARCHAR},
+		#{changeduty,jdbcType=INTEGER},
+		#{changeday,jdbcType=TIMESTAMP},
+		
+		#{createTime,jdbcType=TIMESTAMP}, #{creatorId,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.kangrise.xunjian.admin.sm.entity.UserDuty">
+		insert into t_userduty
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="year != null">
+				year,
+			</if>
+			<if test="month != null">
+				month,
+			</if>
+			<if test="day != null">
+				day,
+			</if>
+			<if test="dayweek != null">
+				dayweek,
+			</if>
+			<if test="frequency != null">
+				frequency,
+			</if>
+			<if test="olduserid != null">
+				olduserid,
+			</if>
+			<if test="userid != null">
+				userid,
+			</if>
+			<if test="areaids != null">
+				areaids,
+			</if>
+			<if test="date != null">
+				date,
+			</if>
+
+			<if test="isleave != null">
+				isleave,
+			</if>
+			<if test="thanDay != null">
+				thanDay,
+			</if>
+			<if test="leavetype != null">
+				leavetype,
+			</if>
+			<if test="changeduty != null">
+				changeduty,
+			</if>
+			<if test="changeday != null">
+				changeday,
+			</if>
+
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="creatorId != null">
+				CREATOR_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="year != null">
+				#{year,jdbcType=INTEGER},
+			</if>
+			<if test="month != null">
+				#{month,jdbcType=INTEGER},
+			</if>
+			<if test="day != null">
+				#{day,jdbcType=INTEGER},
+			</if>
+			<if test="dayweek != null">
+				#{dayweek,jdbcType=INTEGER},
+			</if>
+			<if test="frequency != null">
+				#{frequency,jdbcType=VARCHAR},
+			</if>
+			<if test="olduserid != null">
+				#{olduserid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=BIGINT},
+			</if>
+			<if test="areaids != null">
+				#{areaids,jdbcType=VARCHAR},
+			</if>
+			<if test="date != null">
+				#{date,jdbcType=TIMESTAMP},
+			</if>
+
+			<if test="isleave != null">
+				#{isleave,jdbcType=INTEGER},
+			</if>
+			<if test="thanDay != null">
+				#{thanDay,jdbcType=INTEGER},
+			</if>
+			<if test="leavetype != null">
+				#{leavetype,jdbcType=VARCHAR},
+			</if>
+			<if test="changeduty != null">
+				#{changeduty,jdbcType=INTEGER},
+			</if>
+			<if test="changeday != null">
+				#{changeday,jdbcType=TIMESTAMP},	
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creatorId != null">
+				#{creatorId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.kangrise.xunjian.admin.sm.entity.UserDuty">
+		update t_userduty
+		<set>
+			<if test="year != null">
+				year = #{year,jdbcType=INTEGER},
+			</if>
+			<if test="month != null">
+				month = #{month,jdbcType=INTEGER},
+			</if>
+			<if test="day != null">
+				day = #{day,jdbcType=INTEGER},
+			</if>
+			<if test="dayweek != null">
+				dayweek = #{dayweek,jdbcType=INTEGER},
+			</if>
+			<if test="frequency != null">
+				frequency = #{frequency,jdbcType=VARCHAR},
+			</if>
+			<if test="olduserid != null">
+				olduserid = #{olduserid,jdbcType=BIGINT},
+			</if>
+			<if test="userid != null">
+				userid = #{userid,jdbcType=BIGINT},
+			</if>
+			<if test="areaids != null">
+				areaids = #{areaids,jdbcType=VARCHAR},
+			</if>
+			<if test="date != null">
+				date = #{date,jdbcType=TIMESTAMP},
+			</if>
+
+			<if test="isleave != null">
+				isleave = #{isleave,jdbcType=INTEGER},
+			</if>
+			<if test="thanDay != null">
+				thanDay = #{thanDay,jdbcType=INTEGER},
+			</if>
+			<if test="leavetype != null">
+				leavetype = #{leavetype,jdbcType=VARCHAR},
+			</if>
+			<if test="changeduty != null">
+				changeduty = #{changeduty,jdbcType=INTEGER},
+			</if>
+			<if test="changeday != null">
+				changeday = #{changeday,jdbcType=TIMESTAMP},	
+			</if>
+
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creatorId != null">
+				CREATOR_ID = #{creatorId,jdbcType=BIGINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.kangrise.xunjian.admin.sm.entity.UserDuty">
+		update t_userduty
+		set year = #{year,jdbcType=INTEGER},
+		month = #{month,jdbcType=INTEGER},
+		day = #{day,jdbcType=INTEGER},
+		dayweek = #{dayweek,jdbcType=INTEGER},
+		frequency = #{frequency,jdbcType=VARCHAR},
+		olduserid =
+		#{olduserid,jdbcType=BIGINT},
+		userid = #{userid,jdbcType=BIGINT},
+		areaids = #{areaids,jdbcType=VARCHAR},
+		date =
+		#{date,jdbcType=TIMESTAMP},
+		isleave = #{isleave,jdbcType=INTEGER},
+		thanDay = #{thanDay,jdbcType=INTEGER},
+		leavetype = #{leavetype,jdbcType=VARCHAR},
+		changeduty =
+		#{changeduty,jdbcType=INTEGER},
+		changeday = #{changeday,jdbcType=TIMESTAMP},	
+		CREATE_TIME =
+		#{createTime,jdbcType=TIMESTAMP},
+		CREATOR_ID =
+		#{creatorId,jdbcType=BIGINT}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<select id="listUserDuty" parameterType="com.kangrise.xunjian.admin.sm.entity.UserDuty"
+		resultMap="BaseResultMap">
+		select
+		<include refid="With_User_List"></include>
+		from t_userduty as ud
+		left join t_userinfo as user on ud.userid =
+		user.id
+		<where>
+			<if test="year != null">
+				and ud.year = #{year,jdbcType=INTEGER}
+			</if>
+			<if test="month != null">
+				and ud.month = #{month,jdbcType=INTEGER}
+			</if>
+			<if test="day != null">
+				and ud.day = #{day,jdbcType=INTEGER}
+			</if>
+			<if test="dayweek != null">
+				and ud.dayweek = #{dayweek,jdbcType=INTEGER}
+			</if>
+			<if test="frequency != null">
+				and ud.frequency = #{frequency,jdbcType=VARCHAR}
+			</if>
+			<if test="olduserid != null">
+				and ud.olduserid = #{olduserid,jdbcType=BIGINT}
+			</if>
+			<if test="userid != null">
+				and ud.userid = #{userid,jdbcType=BIGINT}
+			</if>
+			<if test="areaids != null">
+				and ud.areaids = #{areaids,jdbcType=VARCHAR}
+			</if>
+			<if test="date != null">
+				and ud.date = #{date,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createTime != null">
+				and ud.CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="creatorId != null">
+				and ud.CREATOR_ID = #{creatorId,jdbcType=BIGINT}
+			</if>
+		</where>
+	</select>
+
+	<select id="listUserDutyResultMap" parameterType="com.kangrise.xunjian.admin.sm.entity.UserDuty"
+		resultType="java.util.Map">
+		SELECT duty.*, uinfo.name,ouinfo.name AS oldusername FROM t_userduty
+		duty
+		LEFT JOIN t_userinfo uinfo ON duty.userid=uinfo.id
+		LEFT JOIN
+		t_userinfo ouinfo ON duty.olduserid=ouinfo.id
+		<where>
+			<if test="year != null">
+				and duty.year = #{year,jdbcType=INTEGER}
+			</if>
+			<if test="month != null">
+				and duty.month = #{month,jdbcType=INTEGER}
+			</if>
+			<if test="day != null">
+				and duty.day = #{day,jdbcType=INTEGER}
+			</if>
+			<if test="dayweek != null">
+				and duty.dayweek = #{dayweek,jdbcType=INTEGER}
+			</if>
+			<if test="frequency != null">
+				and duty.frequency = #{frequency,jdbcType=VARCHAR}
+			</if>
+			<if test="userid != null">
+				and duty.userid = #{userid,jdbcType=BIGINT}
+			</if>
+			<if test="areaids != null">
+				and duty.areaids = #{areaids,jdbcType=VARCHAR}
+			</if>
+			<if test="date != null">
+				and duty.date = #{date,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createTime != null">
+				and duty.CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="creatorId != null">
+				and duty.CREATOR_ID = #{creatorId,jdbcType=BIGINT}
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleByYearMonthDay">
+		delete from
+		t_userduty
+		where year =
+		#{year,jdbcType=INTEGER} and month = #{month,jdbcType=INTEGER} and day
+		= #{day,jdbcType=INTEGER}
+	</delete>
+
+	<!-- 分配巡检查询值班管理 -->
+	<select id="getAllotClass" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT d.*,u.`name`,u.fixtype,u.deviceToken FROM t_userduty d
+		LEFT JOIN t_userinfo u
+		ON u.id = d.userid
+		where 1=1
+		<if test="btime != null and btime != ''">
+			<![CDATA[  and DATE_FORMAT(d.date, '%Y-%m-%d') >= DATE_FORMAT(#{btime}, '%Y-%m-%d')    ]]>
+		</if>
+		<if test="etime != null and etime != ''">
+			<![CDATA[  and DATE_FORMAT(d.date, '%Y-%m-%d') <= DATE_FORMAT(#{etime}, '%Y-%m-%d')    ]]>
+		</if>
+	</select>
+	<!-- 查询当天值班的人员 -->
+	<select id="getAllotClassByDate" resultType="map">
+		SELECT d.*,u.`name` FROM t_userduty d
+		LEFT JOIN t_userinfo u ON u.id =
+		d.userid
+		where 1=1 and d.isleave = 0 <!-- and changeduty = 0 -->
+		<if test="query_time != null and query_time != ''">
+			<![CDATA[  and DATE_FORMAT(d.date, '%Y-%m-%d') = DATE_FORMAT(#{query_time}, '%Y-%m-%d')    ]]>
+		</if>
+	</select>
+	
+	<!-- 查询当天值班的人员(携带相同标签,排除自己) -->
+	<select id="getSameTageOfAllotClassByDate" resultType="map">
+		SELECT d.*,u.`name` FROM t_userduty d
+		LEFT JOIN t_userinfo u ON u.id =
+		d.userid
+		where 1=1 
+		and d.isleave = 0 
+		<![CDATA[  AND d.userid <> ${uid}    ]]>
+		and u.fixtype=(SELECT fixtype FROM t_userinfo WHERE id=${uid})
+		<if test="query_time != null and query_time != ''">
+			<![CDATA[  and DATE_FORMAT(d.date, '%Y-%m-%d') = DATE_FORMAT(#{query_time}, '%Y-%m-%d')    ]]>
+		</if>
+	</select>
+	
+	<select id="listUserDutyByUser" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_userduty
+		<where>
+			<if test="olduserid != null">
+				and userid = #{olduserid,jdbcType=BIGINT}
+			</if>
+			<if test="startTime != null">
+				<![CDATA[  and DATE_FORMAT(date, '%Y-%m-%d') >= DATE_FORMAT(#{startTime}, '%Y-%m-%d')    ]]>
+			</if>
+			<if test="endTime != null">
+				<![CDATA[  and DATE_FORMAT(date, '%Y-%m-%d') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d')    ]]>
+			</if>
+		</where>
+	</select>
+	<select id="selectOtherWorker" resultType="map">
+		SELECT
+		DISTINCT ui.id,
+		ui.`name`
+		FROM
+			t_userduty ud
+		LEFT JOIN t_userinfo ui ON ud.userid = ui.id
+		WHERE
+		<![CDATA[DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date},'%Y-%m-%d')]]>
+	</select>
+	
+	<select id="getUserDutyByDateAndUser"  resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_userduty 
+		where 1=1 
+		and userid=${userid}
+		<![CDATA[  and DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{thedate}, '%Y-%m-%d')    ]]>
+	</select>
+	<!-- 请假申请查询 那些天有该用户-->
+	<select id="getDutyByDateAndUser"  resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_userduty 
+		where 1=1 
+		and userid=${userid}
+		<![CDATA[  and DATE_FORMAT(date, '%Y-%m-%d') >= DATE_FORMAT(#{stime}, '%Y-%m-%d')    ]]>
+		<![CDATA[  and DATE_FORMAT(date, '%Y-%m-%d') <= DATE_FORMAT(#{etime}, '%Y-%m-%d')    ]]>
+	</select>
+	<!-- 查询用户上一次值班时间 -->
+	<select id="getLastTimeBy" resultType="java.lang.String" parameterType="java.util.Map">
+		SELECT MAX(date)
+		FROM t_userduty
+		WHERE 1=1
+		AND isleave = 0
+		<if test="userid != null">
+			AND userid = #{userid}
+		</if>
+		<if test="date != null and date != ''">
+			<![CDATA[ AND DATE_FORMAT(date, '%Y-%m-%d') < DATE_FORMAT(#{date}, '%Y-%m-%d') ]]>
+		</if>	
+	</select>
+</mapper>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangrise.xunjian.admin.sm.mapper.UserGroupMapper">
+	<resultMap id="BaseResultMap"
+		type="com.kangrise.xunjian.admin.sm.entity.UserGroup">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="ismana" property="ismana" jdbcType="INTEGER" />
+		<result column="isdel" property="isdel" jdbcType="INTEGER" />
+		<result column="description" property="description" jdbcType="LONGVARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="CREATOR_ID" property="creatorId" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name,ismana,isdel , description, CREATE_TIME, CREATOR_ID
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_usergroup
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_usergroup
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.kangrise.xunjian.admin.sm.entity.UserGroup">
+		insert into t_usergroup (id,
+		name,ismana,isdel,
+		description, CREATE_TIME,
+		CREATOR_ID)
+		values
+		(#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},#{isdel,jdbcType=INTEGER},
+		#{description,jdbcType=LONGVARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{creatorId,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.kangrise.xunjian.admin.sm.entity.UserGroup">
+		insert into t_usergroup
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="ismana != null">
+				ismana,
+			</if>
+			<if test="isdel != null">
+				isdel,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="creatorId != null">
+				CREATOR_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="ismana != null">
+				#{ismana,jdbcType=INTEGER},
+			</if>
+			<if test="isdel != null">
+				#{isdel,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creatorId != null">
+				#{creatorId,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.kangrise.xunjian.admin.sm.entity.UserGroup">
+		update t_usergroup
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.kangrise.xunjian.admin.sm.entity.UserGroup">
+		update t_usergroup
+		set name = #{name,jdbcType=VARCHAR},
+		description = #{description,jdbcType=LONGVARCHAR}
+		where id =
+		#{id,jdbcType=BIGINT}
+	</update>
+	<select id="listUserGroup" parameterType="com.kangrise.xunjian.admin.sm.entity.UserGroup"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_usergroup
+		where 1=1 and isdel=0 and ismana=0
+		<if test="name != null">
+			and name like '%${name}%'
+		</if>
+		<if test="description != null">
+			and description like '%${description}%'
+		</if>
+	</select>
+	<select id="listAllUserGroup" parameterType="com.kangrise.xunjian.admin.sm.entity.UserGroup"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from t_usergroup
+		where 1=1 and isdel=0
+		<if test="name != null">
+			and name like '%${name}%'
+		</if>
+		<if test="description != null">
+			and description like '%${description}%'
+		</if>
+	</select>
+	<update id="logicDeleteByPrimaryKey" parameterType="com.kangrise.xunjian.admin.sm.entity.UserGroup">
+		update t_usergroup
+		set isdel = 1
+		where id =
+		#{id,jdbcType=BIGINT}
+	</update>
+	
+	<!-- 获取有几个组 -->
+	<select id="getCountGroup" resultType="int">
+		SELECT COUNT(*) count FROM t_usergroup 
+		WHERE 1 = 1 AND isdel = 0 AND ismana = 0
+	</select>
+	
+</mapper>

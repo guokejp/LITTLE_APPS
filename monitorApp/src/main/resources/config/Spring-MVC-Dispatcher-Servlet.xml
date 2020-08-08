@@ -1,0 +1,82 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+
+<!-- Scans the classpath of this application for @Components to deploy as beans -->
+	<context:component-scan base-package="com.kangrise.xunjian.**.rest" annotation-config="true"/>
+
+	<mvc:view-controller path="/" view-name="redirect:/login.jsp"/>
+	
+	<!-- Configures the @Controller programming model -->
+	<mvc:annotation-driven />
+	 
+	<mvc:default-servlet-handler />
+	
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<!-- 编码问题解决 -->
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+					</property>
+				</bean>
+				
+				<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />
+				<!-- @ResponseBody json 支持 -->
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+				
+			</list>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.data.web.config.SpringDataWebConfiguration" />
+	
+
+	<!--拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+           <mvc:mapping path="/**"/>
+           <mvc:exclude-mapping path="/public/**"/>
+           <mvc:exclude-mapping path="/views/**"/>
+           <bean class="com.kangrise.xunjian.interceptor.WebInterceptor" />  
+       	</mvc:interceptor>
+	</mvc:interceptors> 
+
+	<!-- 配置视图解析器 要求将jstl的包加到classpath -->
+	<!-- ViewResolver -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!--  这里申明的id必须为multipartResolver  -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<!-- one of the properties available; the maximum file size in bytes -->
+    	<property name="maxUploadSize" value="524288000"/><!-- (500MB * 1024)kb *1024 -->
+    	<property name="defaultEncoding" value="UTF-8" />  
+	</bean>
+
+
+
+</beans>

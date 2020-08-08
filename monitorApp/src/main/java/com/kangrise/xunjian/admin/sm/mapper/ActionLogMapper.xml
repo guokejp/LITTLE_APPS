@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangrise.xunjian.admin.sm.mapper.ActionLogMapper">
+	<resultMap id="BaseResultMap" type="com.kangrise.xunjian.admin.sm.entity.ActionLog">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="request_ip" property="requestIp" jdbcType="VARCHAR" />
+		<result column="source" property="source" jdbcType="VARCHAR" />
+		<result column="request_date" property="requestDate" jdbcType="TIMESTAMP" />
+		<result column="browser_info" property="browserInfo" jdbcType="VARCHAR" />
+		<result column="request_url" property="requestUrl" jdbcType="VARCHAR" />
+		<result column="request_param" property="requestParam" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_name, request_ip, source, request_date, browser_info, request_url,
+		request_param
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_action_log
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_action_log
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insertSelective" parameterType="com.kangrise.xunjian.admin.sm.entity.ActionLog">
+		insert into t_action_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="requestIp != null">
+				request_ip,
+			</if>
+			<if test="source != null">
+				source,
+			</if>
+			<if test="requestDate != null">
+				request_date,
+			</if>
+			<if test="browserInfo != null">
+				browser_info,
+			</if>
+			<if test="requestUrl != null">
+				request_url,
+			</if>
+			<if test="requestParam != null">
+				request_param,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="requestIp != null">
+				#{requestIp,jdbcType=VARCHAR},
+			</if>
+			<if test="source != null">
+				#{source,jdbcType=VARCHAR},
+			</if>
+			<if test="requestDate != null">
+				#{requestDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="browserInfo != null">
+				#{browserInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="requestUrl != null">
+				#{requestUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="requestParam != null">
+				#{requestParam,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.kangrise.xunjian.admin.sm.entity.ActionLog">
+		update t_action_log
+		<set>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="requestIp != null">
+				request_ip = #{requestIp,jdbcType=VARCHAR},
+			</if>
+			<if test="source != null">
+				source = #{source,jdbcType=VARCHAR},
+			</if>
+			<if test="requestDate != null">
+				request_date = #{requestDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="browserInfo != null">
+				browser_info = #{browserInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="requestUrl != null">
+				request_url = #{requestUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="requestParam != null">
+				request_param = #{requestParam,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="getActionLogPageBy" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from t_action_log
+		where 1=1
+		<if test="type != null">
+			and request_url like '%${type}'
+		</if>
+	</select>
+
+	<select id="getActionLogCount" resultType="int" parameterType="java.util.Map">
+		select
+		count(*)
+		from t_action_log
+	</select>
+</mapper>

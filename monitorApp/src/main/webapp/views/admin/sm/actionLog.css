@@ -1,0 +1,8 @@
+﻿
+.leftListTable td:hover {cursor: pointer;}
+
+.basicInformationModal table td { font-size: 13px; color: #5a5a5a;}
+.basicInformationModal table th { font-size: 13px; color: #5a5a5a; text-align: center}
+.basicInformationModal table .table-title { background-color: #f4f4f4; height: 40px;font-size: 14px; }
+.basicInformationModal table .info-name { text-align: right;background-color: #f4f4f4;width: 15% }
+.basicInformationModal table .info-vlaue { width: 35% }

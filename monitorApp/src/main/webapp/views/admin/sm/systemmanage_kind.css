@@ -1,0 +1,25 @@
+﻿/**
+* Description: 设备种类管理独立样式
+* Version: 2.0.0
+* Author: JIALIN,GUO
+* Date:2017/10/17
+* Copyright: (c) Copyright 2017 G. All Rights Reserved.
+**/
+
+@CHARSET "UTF-8";
+
+/*加载图样式*/
+.mask_juhua_content {
+      display: none;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      opacity: 0.6;
+      z-index: 9999;
+}
+.addDeviceModal .form-control {width: 375px !important;}
+.deviceKindTable table th:nth-child(1),
+.deviceKindTable table th:nth-child(2) {border-right: 1px solid #ddd;}

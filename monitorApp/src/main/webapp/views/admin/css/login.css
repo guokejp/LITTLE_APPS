@@ -1,0 +1,125 @@
+/**
+* Description: 登录页面CSS样式
+* Version: 1.0.0
+* Author: JIALIN,GUO
+* Date:2017/11/23
+* Copyright: (c) Copyright 2017 G. All Rights Reserved.
+**/
+
+/**-------------------------------------
+*             login header
+-------------------------------------**/
+.loginHeaderContainer {height: 60px;background-color: #ffffff;}
+.loginHeaderContainer .loginLogo {display: inline-block;text-decoration: none;padding: 14px 0;margin-left: 140px;}
+.loginHeaderContainer .loginLogo img {vertical-align: top;width: 31px;}
+.loginHeaderContainer .loginLogo .logoText {font-size: 21px;color: #475367;margin-left: 6px;}
+
+/**-------------------------------------
+*             login body
+-------------------------------------**/
+.loginBodyContainer {
+    height: 82%;
+    background: url("../images/login/loginBg.png") no-repeat;
+    background-size: auto 100%;
+    background-position: -250px 1px;
+    position: relative;
+}
+.loginBodyContainer .loginBodyTitle {
+    height: 50px;
+    line-height: 50px;
+    padding-left: 30px;
+    border-bottom: 1px solid #cccccc;
+}
+.loginBodyContainer .loginBodyTitle .titleText {
+    font-size: 16px;
+    color: #666666;
+}
+
+.loginBodyContainer .loginFormContainer {
+    position: absolute;
+    top: 115px;
+    right: 150px;
+    width: 350px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+}
+.loginBodyContainer .loginFormContainer .loginFormBox {
+    margin: 30px 35px 40px 35px;
+}
+.loginBodyContainer .loginFormContainer .loginFormBox .loginInputBox {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    position: relative;
+}
+.loginBodyContainer .loginFormContainer .loginFormBox .loginInputName{
+    margin-bottom: 25px;
+}
+.loginBodyContainer .loginFormContainer .loginFormBox .loginInputPwd {
+    margin-bottom: 35px;
+}
+.loginBodyContainer .loginFormContainer .loginFormBox .loginInputBox label {
+    border: 1px solid #d3d3d3;
+    padding: 12px;
+    margin: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-right-width: 0;
+}
+.loginBodyContainer .loginFormContainer .loginFormBox .loginBtnBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.loginBodyContainer .loginFormContainer .loginFormBox .loginInputBox label .glyphicon {
+    top: 0;
+    color: #666;
+}
+.loginBodyContainer .loginFormContainer .loginFormBox .loginInputBox label .line {
+    display: inline-block;
+    width: 2px;
+    height: 16px;
+    background-color: #d3d3d3;
+    position: absolute;
+    top: 11px;
+    right: 0;
+}
+.loginBodyContainer .loginFormContainer .loginFormBox .loginInputBox input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #d3d3d3;
+    padding: 5px 15px 5px 50px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #5d5c5c !important;
+}
+.loginBodyContainer .loginFormContainer .loginFormBox .loginInputBox input:focus {
+    outline: none;
+}
+
+.loginBodyContainer .loginFormContainer .loginFormBox .loginSubmitBox .gui-btn-ok {
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #00a279;
+    border-color: #00a279;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+    outline: none;
+}
+.loginBodyContainer .loginFormContainer .loginFormBox .loginSubmitBox .gui-btn-ok:focus,
+.loginBodyContainer .loginFormContainer .loginFormBox .loginSubmitBox .gui-btn-ok.focus {  color: #fff;background-color: #00a279;border-color: #00a279;  }
+.loginBodyContainer .loginFormContainer .loginFormBox .loginSubmitBox .gui-btn-ok:hover { color: #fff;background-color: #00a279;border-color: #00a279;}
+
+/**-------------------------------------
+*             login footer
+-------------------------------------**/
+.loginFootContainer { height: 56px;background-color: #ffffff; }
+.loginFootContainer .loginCopyRight { font-size: 14px;color: #3a3a3a;line-height: 56px; }

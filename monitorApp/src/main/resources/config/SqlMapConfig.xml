@@ -1,0 +1,27 @@
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 返回Object查询字段为Null也查询出来 -->
+	<settings>  
+        <setting name="callSettersOnNulls" value="true"/>  
+    </settings>  
+	<!-- 定义 别名 -->
+	<typeAliases>
+		<!-- 批量别名定义 指定包路径，自动扫描包下边的pojo，定义别名，别名默认为类名（首字母小写或大写） -->
+		<package name="com.kangrise.xunjian.admin.sm.entity" />
+	</typeAliases>
+	<!-- 定义 别名 -->
+	<!-- 配置分页插件 -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库-->        
+            <property name="dialect" value="mysql"/>
+        </plugin>
+    </plugins>
+	<!--引入要使用的配置-->
+	<mappers>
+	
+	</mappers>
+	 
+</configuration>

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kangrise.xunjian.admin.equip.mapper.EquipDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.kangrise.xunjian.admin.equip.entity.EquipDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="infoid" property="infoid" jdbcType="BIGINT" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+    <result column="oneself" property="oneself" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="detailidentify" property="detailidentify" jdbcType="VARCHAR" />
+    <result column="dspecific" property="dspecific" jdbcType="VARCHAR" />
+    <result column="dunit" property="dunit" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATOR_ID" property="creatorId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.kangrise.xunjian.admin.equip.entity.EquipDetail" extends="BaseResultMap" >
+    <result column="detailnote" property="detailnote" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, infoid, isdel,oneself, name, detailidentify, dspecific,dunit , amount, url, CREATE_TIME, CREATOR_ID
+  </sql>
+  <sql id="Blob_Column_List" >
+    detailnote
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_equipdetail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_equipdetail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kangrise.xunjian.admin.equip.entity.EquipDetail" >
+    insert into t_equipdetail (id, infoid, isdel, oneself,
+      name, detailidentify, dspecific, dunit,
+      amount, url, CREATE_TIME, 
+      CREATOR_ID, detailnote)
+    values (#{id,jdbcType=BIGINT}, #{infoid,jdbcType=BIGINT}, #{isdel,jdbcType=INTEGER}, #{oneself,jdbcType=INTEGER},
+      #{name,jdbcType=VARCHAR}, #{detailidentify,jdbcType=VARCHAR}, #{dspecific,jdbcType=VARCHAR}, #{dunit,jdbcType=VARCHAR},
+      #{amount,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creatorId,jdbcType=BIGINT}, #{detailnote,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kangrise.xunjian.admin.equip.entity.EquipDetail" >
+    insert into t_equipdetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="infoid != null" >
+        infoid,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+      <if test="oneself != null" >
+        oneself,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="detailidentify != null" >
+        detailidentify,
+      </if>
+      <if test="dspecific != null" >
+        dspecific,
+      </if>
+       <if test="dunit != null" >
+        dunit,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="creatorId != null" >
+        CREATOR_ID,
+      </if>
+      <if test="detailnote != null" >
+        detailnote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="infoid != null" >
+        #{infoid,jdbcType=BIGINT},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="oneself != null" >
+        #{oneself,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="detailidentify != null" >
+        #{detailidentify,jdbcType=VARCHAR},
+      </if>
+      <if test="dspecific != null" >
+        #{dspecific,jdbcType=VARCHAR},
+      </if>
+      <if test="dunit != null" >
+        #{dunit,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="detailnote != null" >
+        #{detailnote,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kangrise.xunjian.admin.equip.entity.EquipDetail" >
+    update t_equipdetail
+    <set >
+      <if test="infoid != null" >
+        infoid = #{infoid,jdbcType=BIGINT},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+      <if test="oneself != null" >
+        oneself = #{oneself,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="detailidentify != null" >
+        detailidentify = #{detailidentify,jdbcType=VARCHAR},
+      </if>
+      <if test="dspecific != null" >
+        dspecific = #{dspecific,jdbcType=VARCHAR},
+      </if>
+      <if test="dspecific != null" >
+        dspecific = #{dspecific,jdbcType=VARCHAR},
+      </if>
+      <if test="dunit != null" >
+        dunit = #{dunit,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatorId != null" >
+        CREATOR_ID = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="detailnote != null" >
+        detailnote = #{detailnote,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kangrise.xunjian.admin.equip.entity.EquipDetail" >
+    update t_equipdetail
+    set infoid = #{infoid,jdbcType=BIGINT},
+      isdel = #{isdel,jdbcType=INTEGER},
+      oneself = #{oneself,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      detailidentify = #{detailidentify,jdbcType=VARCHAR},
+      dspecific = #{dspecific,jdbcType=VARCHAR},
+      dunit = #{dunit,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATOR_ID = #{creatorId,jdbcType=BIGINT},
+      detailnote = #{detailnote,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kangrise.xunjian.admin.equip.entity.EquipDetail" >
+    update t_equipdetail
+    set infoid = #{infoid,jdbcType=BIGINT},
+      isdel = #{isdel,jdbcType=INTEGER},
+      oneself = #{oneself,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      detailidentify = #{detailidentify,jdbcType=VARCHAR},
+      dspecific = #{dspecific,jdbcType=VARCHAR},
+      dunit = #{dunit,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATOR_ID = #{creatorId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 自定义操作 -->
+  <!-- 根据父类id查询 -->
+  <select id="selectAllByInfoid" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_equipdetail
+    where isdel = 0 and
+    infoid = #{infoid,jdbcType=BIGINT}
+  </select>
+   <!-- 根据父类id查询 -->
+  <select id="selectAllByInfoidapp" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_equipdetail
+    where isdel = 0 and
+    infoid = #{infoid,jdbcType=BIGINT}
+  </select>
+  <!-- 批量删除 --> 
+  <delete id="deleteByInfoId" parameterType="java.lang.String" >
+    delete from t_equipdetail 
+    where infoid in (${_parameter})
+  </delete>
+  
+  <!-- 批量逻辑删除 --> 
+  <update id="logicDeleteByInfoId" parameterType="java.lang.String" >
+    update t_equipdetail set isdel=1 where infoid in (${_parameter})
+  </update>
+  
+  <!-- 批量删除 -->
+  <delete id="delBatchEqD" parameterType="java.util.Map">
+  	delete from t_equipdetail
+  	WHERE id in
+  	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
+  	#{item}  
+ 	</foreach>  
+  </delete>
+  <update id="logicDelBatchEqD" parameterType="java.util.Map">
+  	update t_equipdetail
+  	set isdel=1 
+  	WHERE id in
+  	<foreach item="item" index="index" collection="ids" open="(" separator="," close=")">  
+  	#{item}  
+ 	</foreach>  
+  </update>
+  <!-- 批量查询二维码 -->
+  <select id="selectAllByIds" resultType="java.util.Map" >
+    select e.id, e.infoid,e.name,e.detailidentify,e.oneself,
+    equip.`name` pname
+    from t_equipdetail e
+    LEFT JOIN t_equipinfo equip ON equip.id = e.infoid
+    where e.isdel = 0 and e.id in
+    <foreach item="ids" index="index" collection="list" open="(" separator="," close=")">  
+  		#{ids}  
+ 	</foreach> 
+  </select>
+  
+  <!-- 所有二维码 -->
+  <select id="selectAll" resultType="java.util.Map" >
+    select e.id, e.infoid,e.name,e.detailidentify,e.oneself,equipinfo.`name` pname
+    from t_equipdetail e
+	LEFT JOIN t_equipinfo equipinfo ON equipinfo.id = e.infoid
+    where e.isdel = 0 
+  </select>
+  
+  <!-- 根据设备id和名称修改设备本身配件名称 -->
+  <update id="setNameByInfoid" parameterType="java.util.Map">
+  		update t_equipdetail SET `name` = #{name}
+		WHERE infoid = #{infoid} AND oneself = 1
+  </update>
+  
+  <!-- 查询是否有相同的配件 -->
+  <select id="isRepeatName" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+  		select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_equipdetail
+    where isdel = 0 
+    <if test="name != null and name != ''">
+    	and `name` = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="dspecific != null and dspecific != ''">
+    	and `dspecific` = #{dspecific,jdbcType=VARCHAR}
+    </if>
+    <if test="infoid != null and infoid != ''">
+    	and `infoid` = #{infoid,jdbcType=BIGINT}
+    </if>
+  </select>
+  <!-- 查询所有配件 -->
+  <select id="listAll" resultMap="BaseResultMap">
+  	select DISTINCT `name` from t_equipdetail where isdel = 0
+  </select>
+  <!-- 根据配件id查询设备厂商 -->
+  <select id="findIfirmByDetailId" resultType="string">
+  	SELECT
+		equipinfo.ifirm
+	FROM
+		t_equipdetail equipdetail
+	LEFT JOIN t_equipinfo equipinfo ON equipdetail.infoid = equipinfo.id
+	WHERE
+		equipdetail.id = #{detailId}
+  </select>
+  
+  <!-- 批量查询配件名称和规格除本身和其他 -->
+  <select id="getBatchPartsByDevices" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	SELECT `name`,dspecific
+	FROM t_equipdetail
+	WHERE 1=1 AND oneself=0 
+	AND isdel = 0
+	AND infoid IN 
+	<foreach collection="array" index="index" item="devices" open="(" separator="," close=")">
+		#{devices}
+	</foreach>
+	GROUP BY `name`,dspecific
+  </select>
+  
+  <!-- 根据设备id和配件名称和规格删除配件除本身和其他 -->
+  <update id="delBatchDetail" parameterType="java.util.Map">
+		update t_equipdetail
+		<set>
+			isdel = 1
+		</set>
+		WHERE 1=1
+		AND oneself=0 
+		AND isdel = 0
+		<if test="equipDetail.dspecific == null or equipDetail.dspecific == ''">
+			AND dspecific is NULL
+		</if>
+		<if test="equipDetail.dspecific != null and equipDetail.dspecific != ''">
+			AND dspecific = #{equipDetail.dspecific}
+		</if>
+		<if test="equipDetail.name != null ">
+			AND `name` like '${equipDetail.name}'
+		</if>
+		AND infoid IN
+		<foreach collection="devices" index="index" item="array" open="(" separator="," close=")">
+			#{array}
+		</foreach>
+  </update>
+</mapper>

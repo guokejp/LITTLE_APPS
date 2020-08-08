@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<resList>
+		<resource dbid="0" type="table"  explain="其它设备">
+			<fieldList>
+				<fieldcolumn field="名称" column="name" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="编号" column="identify" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="种类" column="dkname" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="分类" column="root_name" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="数量" column="amount" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="状态" column="istatus" style="" usefx="true" fxname="statusFx" fixtype=""></fieldcolumn>
+				<fieldcolumn field="安装位置" column="ibrand" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="品牌" column="unit" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="安装时间" column="onlinedate" style="" usefx="true" fxname="Formatyyyymmdd" fixtype="date"></fieldcolumn>
+			</fieldList>
+		</resource>
+		<resource dbid="0" type="info" explain="其它设备">
+			<fieldList>
+			</fieldList>
+		</resource>
+		
+		
+		<resource dbid="1" type="table" explain="胶带机">
+			<fieldList>
+				<fieldcolumn field="名称" column="name" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="编号" column="identify" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="种类" column="dkname" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="分类" column="root_name" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="数量" column="amount" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="状态" column="istatus" style="" usefx="true" fxname="statusFx" fixtype=""></fieldcolumn>
+				<fieldcolumn field="安装位置" column="ibrand" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="品牌" column="unit" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="安装时间" column="onlinedate" style="" usefx="true" fxname="Formatyyyymmdd" fixtype="date"></fieldcolumn>
+			</fieldList>
+		</resource>
+		<!-- info公共的列，都需要 -->
+		<resource dbid="" type="info" attribute="public" explain="">
+			<fieldList>
+				<fieldcolumn field="类型" column="dkname" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="名称" column="name" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="编号" column="identify" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="厂商" column="ifirm" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="品牌" column="unit" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="安装位置" column="ibrand" style="" usefx="false" fxname="" fixtype=""></fieldcolumn>
+				<fieldcolumn field="数量" column="amount" style="" usefx="true" fxname="Formatyyyymmdd" fixtype="date"></fieldcolumn>
+				<fieldcolumn field="型号" column="ispecific" style="" usefx="true" fxname="Formatyyyymmdd" fixtype="date"></fieldcolumn>
+				<fieldcolumn field="状态" column="istatus" style="" usefx="true" fxname="Formatyyyymmdd" fixtype="date"></fieldcolumn>
+				<fieldcolumn field="上线时间" column="onlinedate" style="" usefx="true" fxname="Formatyyyymmdd" fixtype="date"></fieldcolumn>
+				<fieldcolumn field="到期时间" column="baddate" style="" usefx="true" fxname="Formatyyyymmdd" fixtype="date"></fieldcolumn>
+				<fieldcolumn field="最后更换时间" column="replacedate" style="" usefx="true" fxname="Formatyyyymmdd" fixtype="date"></fieldcolumn>
+				<fieldcolumn field="最后维修时间" column="repairdate" style="" usefx="true" fxname="Formatyyyymmdd" fixtype="date"></fieldcolumn>
+			</fieldList>
+		</resource>
+	</resList>
+</root>
